@@ -36,10 +36,10 @@ function App() {
         <BrowserRouter>
          <Suspense fallback={<Loader></Loader>}>
           <Routes>
-            <Route element={<ProtectedRoute></ProtectedRoute>}>
+
             <Route path="/" element={<SignUp></SignUp>}></Route>
             <Route path="/login" element={<Login></Login>}></Route>
-
+  <Route element={<ProtectedRoute></ProtectedRoute>}>
             <Route path="/dashboard" element={<AppLayout></AppLayout>}>
 
               <Route index element={<AdminDashboard></AdminDashboard>}></Route>
