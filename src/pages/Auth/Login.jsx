@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { handleLogin } from "../../store/Auth";
 import LoginImg from "../../assets/images/Data extraction-amico (1).webp";
+import {Eye,EyeOff} from "lucide-react"
 
 const Login = () => {
   const navigate = useNavigate();
 
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+
+  const[showPass,setshowPass]=useState(false)
 
   const handleEmail = (e) => {
     setemail(e.target.value);
@@ -69,6 +72,7 @@ const Login = () => {
                   <label htmlFor="" className="dark:text-zinc-100">
                     Email Address
                   </label>
+
                   <input
                     value={email}
                     onChange={handleEmail}
@@ -78,41 +82,42 @@ const Login = () => {
                     type="email"
                     placeholder="Email"
                   />
+
+
                 </div>
 
                 <div className="flex flex-col gap-1">
                   <label htmlFor="" className="dark:text-zinc-100">
                     Password
                   </label>
+                  <div className="relative">
                   <input
                     value={password}
                     onChange={handlePassword}
                     autoComplete="current-password"
                     required
                     className="border border-gray-300 w-full p-2 rounded-xl outline-none dark:bg-zinc-800 dark:text-zinc-600"
-                    type="password"
+                    type={showPass ? "text" : "password"}
                     placeholder="password"
                   />
+                  <span onClick={()=>setshowPass(!showPass)}  className="absolute right-3 top-3 ">{showPass ? <Eye strokeWidth={1.25}  size={22}/>:<EyeOff strokeWidth={1.25} size={22} />}</span>
+                  </div>
                 </div>
 
                 <label className="flex items-center gap-2 text-sm dark:text-zinc-100">
                   {" "}
                   <input className="accent-green-400" type="checkbox" />
-                  {/* <div className=' w-4 h-4 border-2 peer-checked:bg-linear-to-r peer-checked:from-yellow-400 peer-checked:to-green-500'></div>  */}
+
                   Remember me
                 </label>
-                <button className=" text-white font-bold  bg-linear-to-r from-pink-500 to-pink-700 rounded-lg p-2 shadow-md hover:scale-105 transition ">
+                <button className=" text-white font-bold  bg-linear-to-r from-pink-500 to-pink-700 rounded-lg p-2 shadow-md hover:scale-95 transition ">
                   Login
                 </button>
 
-                {/* <p className='text-sm text-center text-gray-500'>or continue with</p> */}
-                {/* <div className='flex justify-around items-center m-2'>
-    <div className='flex items-center border border-gray-500 rounded-md p-1 px-6 text-sm'><span></span>Google</div>
-    <div className='flex items-center border border-gray-500 rounded-lg p-2 px-4'><span></span>MicroSoft</div>
-  </div> */}
-                <p className="text-[13px] dark:text-zinc-100">
+
+                <p className="text-[13px] dark:text-zinc-100 text-center">
                   Dont have an account ?{" "}
-                  <Link to={"/"} className="text-pink-600 text-center">
+                  <Link to={"/"} className="text-pink-600 text-center underline">
                     Signup
                   </Link>
                 </p>

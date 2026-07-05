@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {handleSignUp} from "../../store/Auth"
 import {useNavigate,Link} from "react-router-dom"
 import signImg from "../../assets/images/Data extraction-amico (1).webp"
+import {Eye,EyeOff} from "lucide-react"
 
 
 const SignUp = () => {
@@ -12,6 +13,7 @@ const SignUp = () => {
 
   const [password,setpassword]=useState("")
 
+  const [showPass,setshowPass]=useState(false)
 
 const handleSubmit=async(e)=>{
 
@@ -55,21 +57,20 @@ const handleSubmit=async(e)=>{
 
       <div className='flex flex-col gap-1'>
         <label htmlFor="" className='dark:text-zinc-100'>Password</label>
-       <input  value={password}  onChange={(e)=>setpassword(e.target.value)} autoComplete='new-password' className='border border-gray-300 w-full p-2 rounded-xl outline-none dark:text-zinc-100' type="password" placeholder='password' />
+        <div className='relative'>
+       <input  value={password}  onChange={(e)=>setpassword(e.target.value)} autoComplete='new-password' className='border border-gray-300 w-full p-2 rounded-xl outline-none dark:text-zinc-100' type={showPass ? "text": "password"} placeholder='password' />
+     <span onClick={()=>setshowPass(!showPass)} className='absolute right-3 top-3'>{showPass ? <Eye strokeWidth={1.25}  size={22}/>:<EyeOff strokeWidth={1.25} size={22} />}</span>
+     </div>
       </div>
 
 
       <label className="flex items-center gap-2 text-sm dark:text-zinc-100"> <input className="accent-green-400" type="checkbox" />
-      {/* <div className=' w-4 h-4 border-2 peer-checked:bg-linear-to-r peer-checked:from-yellow-400 peer-checked:to-green-500'></div>  */}
-     Remember me</label>
-     <button className=' text-white font-bold  bg-linear-to-r from-pink-500 to-pink-700 rounded-lg p-2 shadow-md hover:scale-105 transition '>SignUp</button>
 
-      {/* <p className='text-sm text-center text-gray-500'>or continue with</p> */}
-      {/* <div className='flex justify-around items-center m-2'>
-        <div className='flex items-center border border-gray-500 rounded-md p-1 px-6 text-sm'><span></span>Google</div>
-        <div className='flex items-center border border-gray-500 rounded-lg p-2 px-4'><span></span>MicroSoft</div>
-      </div> */}
-      <p className='text-[13px] dark:text-zinc-100'>Already have an account ? <Link to={"/login"}  className='text-pink-600'>Login</Link></p>
+     Remember me</label>
+     <button className=' text-white font-bold  bg-linear-to-r from-pink-500 to-pink-700 rounded-lg p-2 shadow-md hover:scale-95 transition  '>SignUp</button>
+
+
+      <p className='text-[13px] dark:text-zinc-100 text-center'>Already have an account ? <Link to={"/login"}  className='text-pink-600 underline'>Login</Link></p>
      </form>
      </div>
 
@@ -83,18 +84,3 @@ const handleSubmit=async(e)=>{
 }
 
 export default SignUp
-
-
-// {/* <div className='flex justify-center items-center h-screen w-screen'>
-//         <div className=' max-w-400  border border-white/30 bg-white/10 rounded-xl p-8 text-center backdrop-blur-md shadow-2xl'>
-//         <h2 className='text-[30px] text-shadow-indigo-50 font-bold text-green-600'>SignUp</h2>
-//             <form className='flex flex-col p-4 gap-4' onSubmit={handleSubmit}>
-//                 {/* <input     className='border border-gray-300 w-full p-2 rounded-xl outline-none' type="text" placeholder='Full Name' /> */}
-//                 <input value={email} onChange={(e)=>setemail(e.target.value)}   autoComplete='email'     className='border border-gray-300 w-full p-2 rounded-xl outline-none' type="email" placeholder='Email' />
-//                 <input  value={password}  onChange={(e)=>setpassword(e.target.value)} autoComplete='new-password' className='border border-gray-300 w-full p-2 rounded-xl outline-none' type="password" placeholder='password' />
-//                 {/* <input className='border border-gray-300 w-full p-2 rounded-xl outline-none' type="password" placeholder='confirm password' /> */}
-//                 <button className='text-white font bg-linear-to-r from-yellow-400 to-green-500 rounded-xl p-2'>SignUp</button>
-//                 <p className='text-[13px]'>Already have an account ? <Link to={"/login"}  className='text-blue-600'>Login</Link></p>
-//             </form>
-//         </div>
-//     </div> */}
