@@ -19,13 +19,11 @@ export const handleSignUp = async (email, password) => {
     // get user
 
     const user = signup.user;
-    console.log(signup.user);
 
-    alert("user created");
-    //get token
-    const token = await signup.user.getIdToken();
 
-    localStorage.setItem("token", token);
+    return user
+
+
   } catch (err) {
     console.log(err.message);
   }
@@ -37,8 +35,7 @@ export const handleLogin = async (email, password) => {
 
     // get user
     const user = userlogin.user;
-
-    alert("login ");
+return user
   } catch (err) {
     console.log(err.message);
   }
