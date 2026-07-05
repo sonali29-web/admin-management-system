@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {Link,useNavigate} from "react-router-dom"
-import {handleLogin} from "../../store/auth";
+import {handleLogin} from "../../store/Auth";
 import LoginImg from "../../assets/images/Data extraction-amico (1).webp"
 
 

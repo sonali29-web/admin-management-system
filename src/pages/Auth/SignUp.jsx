@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {handleSignUp} from "../../store/auth"
+import {handleSignUp} from "../../store/Auth"
 import {useNavigate,Link} from "react-router-dom"
 import signImg from "../../assets/images/Data extraction-amico (1).webp"
 
