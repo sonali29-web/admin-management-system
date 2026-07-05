@@ -19,7 +19,7 @@ useEffect(()=>{
 setUser(currUser);
 setLoading(false)
     })
-return ()=> unsub;
+return ()=> unsub();
 },[])
 
 
