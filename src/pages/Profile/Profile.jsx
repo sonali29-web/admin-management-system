@@ -7,7 +7,7 @@ import { ProfileContext } from "../../store/context/ProfileContext";
 import { AuthContext } from "../../store/context/AuthContext";
 
 const Profile = () => {
-  const { profileDetails, handleProfileChange, currPass, handleCurrChnage } =
+  const { profileDetails, handleProfileChange, currPass, handleCurrChnage,savedProfile,setsavedProfile } =
     useContext(ProfileContext);
 
 const {user}=useContext(AuthContext)
@@ -23,6 +23,8 @@ const {user}=useContext(AuthContext)
       const profileRef = doc(db, "user", user.uid);
 
       await setDoc(profileRef, profileDetails, { merge: true });
+
+      setsavedProfile(profileDetails)
 
       console.log("update email");
 

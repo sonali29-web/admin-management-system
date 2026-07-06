@@ -18,6 +18,10 @@ export const ProfileProvider = ({ children }) => {
     bio: "",
   });
 
+
+
+  const [savedProfile,setsavedProfile]=useState(profileDetails)
+
   const [currPass, setcurrPass] = useState("");
 
   const handleProfileChange = (e) => {
@@ -53,6 +57,7 @@ const ref=doc(db, "user", user.uid)
 
         if (snapshot.exists()){
   setprofileDetails(snapshot.data());
+  setsavedProfile(snapshot.data())
 }else{
   setprofileDetails({
   fullName: "",
@@ -78,6 +83,7 @@ const ref=doc(db, "user", user.uid)
           currPass,
           setcurrPass,
           handleCurrChnage,
+          savedProfile,setsavedProfile
         }}
       >
         {children}

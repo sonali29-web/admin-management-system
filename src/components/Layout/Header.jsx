@@ -28,9 +28,12 @@ function Header() {
 
   const { theme, handleMode } = useContext(ThemeContext);
 
-  const { profileDetails } = useContext(ProfileContext);
+  const { savedProfile } = useContext(ProfileContext);
+
 
   const [show, setshow] = useState(false);
+
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -120,12 +123,12 @@ function Header() {
                 onClick={handleProfile}
                 className="cursor-pointer w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-semibold"
               >
-                {profileDetails?.fullName[0]}
+                {savedProfile?.fullName[0]}
               </div>
 
               <div className="flex flex-col p-2">
                 <h2 className="font-semibold text-md dark:text-zinc-100">
-                  {profileDetails?.fullName}
+                  {savedProfile?.fullName}
                 </h2>
                 <p className="text-sm text-gray-600">Admin</p>
               </div>
