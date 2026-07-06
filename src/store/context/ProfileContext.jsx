@@ -45,18 +45,18 @@ const {user,loading}=useContext(AuthContext)
   useEffect(() => {
     if (loading) return
     if (!user)  return
-    const fetchProfile=async()=>{
+    const fetchProfile = async () => {
+    try {
+      const docRef = doc(db, "user", user.uid);
+      const docProfile = await getDoc(docRef);
 
-
-
-    const docRef = doc(db, "user", user.uid);
-    const docProfile = await getDoc(docRef);
-
-    if (docProfile.exists()) {
-      setprofileDetails(docProfile.data());
+      if (docProfile.exists()) {
+        setprofileDetails(docProfile.data());
+      }
+    } catch (err) {
+      console.log(err.message);
     }
-    }
-
+  };
 fetchProfile()
 }, [user,loading])
 
