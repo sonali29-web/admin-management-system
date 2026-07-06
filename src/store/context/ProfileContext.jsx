@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import {  doc ,getDoc} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { db } from "../firebaseConfig";
 import { auth } from "../Auth";
@@ -7,11 +7,8 @@ import { AuthContext } from "./AuthContext";
 
 export const ProfileContext = createContext();
 
-
-
 export const ProfileProvider = ({ children }) => {
-
-const {user,loading}=useContext(AuthContext)
+  const { user, loading } = useContext(AuthContext);
 
   const [profileDetails, setprofileDetails] = useState({
     fullName: "",
@@ -43,22 +40,22 @@ const {user,loading}=useContext(AuthContext)
   };
 
   useEffect(() => {
-    if (loading) return
-    if (!user)  return
+    if (loading) return;
+    if (!user) return;
     const fetchProfile = async () => {
-    try {
-      const docRef = doc(db, "user", user.uid);
-      const docProfile = await getDoc(docRef);
+      try {
+        const snapshot = await getDoc(doc(db, "user", user.uid));
 
-      if (docProfile.exists()) {
-        setprofileDetails(docProfile.data());
+
+        if (snapshot.exists()) {
+          setprofileDetails(snapshot.data());
+        }
+      } catch (err) {
+        console.log(err.message);
       }
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-fetchProfile()
-}, [user,loading])
+    };
+    fetchProfile();
+  }, [user, loading]);
 
   return (
     <>
