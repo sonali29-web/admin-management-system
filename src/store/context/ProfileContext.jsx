@@ -51,25 +51,17 @@ const ref=doc(db, "user", user.uid)
 
 
 
-        if (!snapshot.exists()){
- await setDoc(ref, {
-        fullName: "",
-        newEmail: user.email,
-        phoneNo: "",
-        dept: "",
-        bio: ""
-      })
-
-      setprofileDetails({
-        fullName: "",
-        newEmail: user.email,
-        phoneNo: "",
-        dept: "",
-        bio: ""
-      })
-        }else {
-          setprofileDetails(snapshot.data());
-        }
+        if (snapshot.exists()){
+  setprofileDetails(snapshot.data());
+}else{
+  setprofileDetails({
+  fullName: "",
+  newEmail: user.email,
+  phoneNo: "",
+  dept: "",
+  bio: "",
+})
+}
       } catch (err) {
         console.log(err.message);
       }
