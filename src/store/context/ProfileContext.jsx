@@ -1,12 +1,18 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import {  doc ,getDoc} from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { db } from "../firebaseConfig";
 import { auth } from "../Auth";
+import { AuthContext } from "./AuthContext";
 
 export const ProfileContext = createContext();
 
+
+
 export const ProfileProvider = ({ children }) => {
+
+const {user,loading}=useContext(AuthContext)
+
   const [profileDetails, setprofileDetails] = useState({
     fullName: "",
     newEmail: "",
@@ -37,15 +43,11 @@ export const ProfileProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    if (loading) return
+    if (!user)  return
+    const fetchProfile=async()=>{
 
 
-
-
-   const unsubscribe = onAuthStateChanged(auth, async (user) => {
-    if (!user) {
-      console.log("User not logged in");
-      return;
-    }
 
     const docRef = doc(db, "user", user.uid);
     const docProfile = await getDoc(docRef);
@@ -53,11 +55,10 @@ export const ProfileProvider = ({ children }) => {
     if (docProfile.exists()) {
       setprofileDetails(docProfile.data());
     }
-  })
+    }
 
-
-  return () => unsubscribe();
-}, []);
+fetchProfile()
+}, [user,loading])
 
   return (
     <>
