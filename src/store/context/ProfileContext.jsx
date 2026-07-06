@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc,setDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { db } from "../firebaseConfig";
 import { auth } from "../Auth";
@@ -44,10 +44,30 @@ export const ProfileProvider = ({ children }) => {
     if (!user) return;
     const fetchProfile = async () => {
       try {
-        const snapshot = await getDoc(doc(db, "user", user.uid));
+
+const ref=doc(db, "user", user.uid)
+
+        const snapshot = await getDoc(ref);
 
 
-        if (snapshot.exists()) {
+
+        if (!snapshot.exists()){
+ await setDoc(ref, {
+        fullName: "",
+        newEmail: user.email,
+        phoneNo: "",
+        dept: "",
+        bio: ""
+      })
+
+      setprofileDetails({
+        fullName: "",
+        newEmail: user.email,
+        phoneNo: "",
+        dept: "",
+        bio: ""
+      })
+        }else {
           setprofileDetails(snapshot.data());
         }
       } catch (err) {

@@ -20,9 +20,6 @@ const {user}=useContext(AuthContext)
 
       console.log(currPass);
 
-
-
-      console.log(userId);
       const profileRef = doc(db, "user", user.uid);
 
       await setDoc(profileRef, profileDetails, { merge: true });
