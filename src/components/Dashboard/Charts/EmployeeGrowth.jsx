@@ -16,7 +16,9 @@ import { EmployeeContext } from "../../../store/context/EmployeeContext";
 const EmployeeGrowth = () => {
   const { employees } = useContext(EmployeeContext);
 
-const last4Months=useMemo(()=> { const now = new Date();
+const last4Months=useMemo(()=> {
+
+  const now = new Date();
 
   const arr = [];
 

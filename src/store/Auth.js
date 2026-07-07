@@ -20,10 +20,7 @@ export const handleSignUp = async (email, password) => {
 
     const user = signup.user;
 
-
-    return user
-
-
+    return user;
   } catch (err) {
     console.log(err.message);
   }
@@ -35,7 +32,7 @@ export const handleLogin = async (email, password) => {
 
     // get user
     const user = userlogin.user;
-return user
+    return user;
   } catch (err) {
     console.log(err.message);
   }
@@ -66,8 +63,8 @@ export const handleUpdateEmail = async (newEmail, currPass) => {
     await updateEmail(user, newEmail);
 
     await auth.currentUser.reload();
-    console.log("update email",newEmail);
-    console.log(auth.currentUser.email)
+    console.log("update email", newEmail);
+    console.log(auth.currentUser.email);
   } catch (err) {
     console.log(err.message);
   }

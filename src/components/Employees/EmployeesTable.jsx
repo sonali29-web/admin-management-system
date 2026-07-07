@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Eye, PencilLine, Trash2 } from "lucide-react";
+import { PencilLine, Trash2 } from "lucide-react";
 import { EmployeeContext } from "../../store/context/EmployeeContext";
 import { useNavigate } from "react-router-dom";
 import { deleteEmp } from "../../store/employeeservice";
@@ -139,10 +139,7 @@ setNotiPopUp("Employee deleted Successfully")
                 </td>
                 <td className="p-3 border-b border-gray-100 dark:text-zinc-100">
                   <div className="flex  items-center gap-3">
-                    <Eye
-                      size={20}
-                      className="text-sky-500 hover:scale-110 cursor-pointer "
-                    />
+
                     <PencilLine
                       onClick={() => handleEdit(emp)}
                       size={20}
